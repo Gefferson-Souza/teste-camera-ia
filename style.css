@@ -20,6 +20,9 @@ em {
 video {
   clear: both;
   display: block;
+  width: 80vw;
+  height: 90vh;
+  object-fit: cover;
 }
 
 section {
