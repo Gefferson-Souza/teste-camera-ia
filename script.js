@@ -76,13 +76,18 @@ function enableCam(event) {
   
 
   const constraints = {
+    facingMode: 'environment',
+      width: { ideal: 640 }, 
+      height: { ideal: 480 },
     video: true
   };
 
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     video.srcObject = stream;
     video.addEventListener('loadeddata', predictWebcam);
-  });
+  }).catch(function (error){
+    console.error('NÃO CONSEGUI ACESSAR A SUA CAMERA, SEU OTARIO!')
+  })
 }
 
 
