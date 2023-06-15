@@ -1,13 +1,15 @@
 
 
 const demosSection = document.getElementById('demos');
-
+const carregado = document.getElementById('carregado');
 var model = undefined;
 
 
 cocoSsd.load().then(function (loadedModel) {
   model = loadedModel;
   demosSection.classList.remove('invisible');
+  
+  carregado.innerText = "CARREGADO!!! Fiz tudo usando o Calango!!!";
 });
 
 
@@ -76,7 +78,6 @@ function enableCam(event) {
   
 
   const constraints = {
-    facingMode: 'environment',
       width: { ideal: 640 }, 
       height: { ideal: 480 },
     video: true
@@ -128,6 +129,7 @@ function predictWebcam() {
 
         children.push(highlighter);
         children.push(p);
+        console.log(children)
       }
     }
     
