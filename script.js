@@ -14,39 +14,6 @@ cocoSsd.load().then(function (loadedModel) {
 
 
 
-
-function handleClick(event) {
-  if (!model) {
-    console.log('Wait for model to load before clicking!');
-    return;
-  }
-  
-  model.detect(event.target).then(function (predictions) {
-
-    console.log(predictions);
-    for (let n = 0; n < predictions.length; n++) {
-      const p = document.createElement('p');
-      p.innerText = predictions[n].class  + ' - with ' 
-          + Math.round(parseFloat(predictions[n].score) * 100) 
-          + '% confidence.';
-      p.style = 'left: ' + predictions[n].bbox[0] + 'px;' + 
-          'top: ' + predictions[n].bbox[1] + 'px; ' + 
-          'width: ' + (predictions[n].bbox[2] - 10) + 'px;';
-
-      const highlighter = document.createElement('div');
-      highlighter.setAttribute('class', 'highlighter');
-      highlighter.style = 'left: ' + predictions[n].bbox[0] + 'px;' +
-          'top: ' + predictions[n].bbox[1] + 'px;' +
-          'width: ' + predictions[n].bbox[2] + 'px;' +
-          'height: ' + predictions[n].bbox[3] + 'px;';
-
-      event.target.parentNode.appendChild(highlighter);
-      event.target.parentNode.appendChild(p);
-    }
-  });
-}
-
-
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
 
@@ -80,16 +47,14 @@ function enableCam(event) {
   const constraints = {
       width: { ideal: 640 }, 
       height: { ideal: 480 },
-    video: {
-      facingMode: 'environment'
-    }
+    video: true
   };
 
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     video.srcObject = stream;
     video.addEventListener('loadeddata', predictWebcam);
   }).catch(function (error){
-    console.error('NÃO CONSEGUI ACESSAR A SUA CAMERA, SEU OTARIO!')
+    console.error('NÃO CONSEGUI ACESSAR A SUA CAMERA')
   })
 }
 
